@@ -7,42 +7,98 @@ const Resume = () => {
   return (
     <section
       id="resume"
-      className="py-20 bg-gradient-to-b from-gray-900 to-black text-white"
+      className="py-20 bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        {/* Heading */}
-        <motion.h2
-          className="text-4xl font-bold mb-6"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          Resume / CV
-        </motion.h2>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          {/* Content (Left Side) */}
+          <div className="text-left order-2 lg:order-1">
+            {/* Heading */}
+            <motion.h2
+              className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              Resume / CV
+            </motion.h2>
 
-        {/* Description */}
-        <motion.p
-          className="text-lg text-gray-400 max-w-2xl mx-auto mb-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.2 }}
-        >
-          Download my latest resume to learn more about my professional journey,
-          skills, and experiences in detail.
-        </motion.p>
+            {/* Description */}
+            <motion.p
+              className="text-lg text-gray-300 mb-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.2 }}
+            >
+              Download my latest resume to learn more about my professional
+              journey, skills, and experiences in detail. I&apos;ve highlighted
+              my technical expertise, project accomplishments, and career
+              milestones.
+            </motion.p>
 
-        {/* Download Button */}
-        <motion.a
-          href="/cv/resume.pdf"
-          download
-          className="inline-flex items-center gap-3 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg transition"
-          initial={{ scale: 0.8, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <FaDownload className="text-xl" />
-          Download CV
-        </motion.a>
+            {/* Features */}
+            <motion.ul
+              className="space-y-3 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              {[
+                "Professional Experience",
+                "Technical Skills",
+                "Education",
+                "Certifications",
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                  <span className="text-gray-300">{item}</span>
+                </li>
+              ))}
+            </motion.ul>
+
+            {/* Download Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <a
+                href="/cv/resume.pdf"
+                download
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/20 transition duration-300 transform hover:-translate-y-1"
+              >
+                <FaDownload className="text-xl" />
+                Download CV
+              </a>
+            </motion.div>
+          </div>
+
+          {/* 3D Model (Right Side) */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            className="order-1 lg:order-2"
+            style={{ overflow: "visible" }}
+          >
+            <div className="w-full h-[600px] overflow-visible">
+              <iframe
+                src="https://my.spline.design/interactivekeyboardbyabhinand-rW8lkcpJAyu3XvtKYzwG2g8h/"
+                frameBorder="0"
+                width="110%"
+                height="110%"
+                title="Interactive Keyboard 3D Model"
+                style={{
+                  minHeight: "600px",
+                  transform: "scale(1.1)",
+                  marginLeft: "-5%",
+                  overflow: "visible",
+                  position: "relative",
+                }}
+              />
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

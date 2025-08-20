@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 
 const blogs = [
   {
@@ -24,36 +25,56 @@ const blogs = [
 
 export default function Blogs() {
   return (
-    <section id="blogs" className="py-20 bg-gray-900 text-white">
+    <section
+      id="blogs"
+      className="py-20 bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white"
+    >
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Title */}
         <motion.h2
-          className="text-4xl font-bold mb-12"
+          className="text-5xl font-extrabold mb-16 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-pink-500 to-purple-500"
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
         >
-          Blogs & Articles
+          Blogs & Articles ✍️
         </motion.h2>
 
         {/* Blogs Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-10">
           {blogs.map((blog, index) => (
             <motion.a
               key={index}
               href={blog.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gray-800 p-6 rounded-xl shadow-lg text-left hover:bg-gray-700 transition"
+              className="relative group p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 shadow-lg text-left overflow-hidden"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <h3 className="text-2xl font-semibold mb-3">{blog.title}</h3>
-              <p className="text-gray-300 mb-4">{blog.description}</p>
-              <span className="text-indigo-400 font-semibold">Read More →</span>
+              {/* Gradient Overlay Glow */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 via-pink-500/10 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+
+              {/* Blog Title */}
+              <h3 className="text-2xl font-bold mb-4 relative z-10 group-hover:text-indigo-300 transition-colors">
+                {blog.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                {blog.description}
+              </p>
+
+              {/* Read More Button */}
+              <span className="flex items-center gap-2 text-indigo-400 font-semibold relative z-10 group-hover:gap-4 transition-all">
+                Read More <FaArrowRight className="text-sm" />
+              </span>
+
+              {/* Hover Border Glow */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-indigo-400/60 transition duration-500"></div>
             </motion.a>
           ))}
         </div>

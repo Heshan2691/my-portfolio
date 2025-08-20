@@ -2,14 +2,14 @@
 
 import { motion } from "framer-motion";
 import { useState, useRef } from "react";
-import {
-  FaLinkedin,
-  FaGithub,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaPhone,
+import { 
+  FaLinkedin, 
+  FaGithub, 
+  FaEnvelope, 
+  FaMapMarkerAlt, 
+  FaPhone, 
   FaArrowRight,
-  FaPaperPlane,
+  FaPaperPlane
 } from "react-icons/fa";
 
 const containerVariants = {
@@ -29,43 +29,40 @@ export default function Contact() {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
-    message: "",
+    message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formFeedback, setFormFeedback] = useState({ type: "", message: "" });
-
+  
   const formRef = useRef<HTMLFormElement>(null);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormState({
       ...formState,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
-
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+    
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setFormFeedback({
         type: "success",
-        message:
-          "Your message has been sent successfully! I&apos;ll get back to you soon.",
+        message: "Your message has been sent successfully! I&apos;ll get back to you soon."
       });
       setFormState({ name: "", email: "", message: "" });
-
+      
       // Reset feedback after 5 seconds
       setTimeout(() => {
         setFormFeedback({ type: "", message: "" });
       }, 5000);
     }, 1500);
   };
-
+  
   return (
     <section
       id="contact"
@@ -73,15 +70,9 @@ export default function Contact() {
     >
       {/* Animated background elements */}
       <div className="absolute w-96 h-96 bg-purple-600/10 rounded-full -top-20 -left-20 blur-3xl animate-pulse"></div>
-      <div
-        className="absolute w-96 h-96 bg-blue-600/10 rounded-full -bottom-20 -right-20 blur-3xl animate-pulse"
-        style={{ animationDelay: "2s" }}
-      ></div>
-      <div
-        className="absolute w-72 h-72 bg-cyan-600/10 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 blur-3xl animate-pulse"
-        style={{ animationDelay: "4s" }}
-      ></div>
-
+      <div className="absolute w-96 h-96 bg-blue-600/10 rounded-full -bottom-20 -right-20 blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
+      <div className="absolute w-72 h-72 bg-cyan-600/10 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 blur-3xl animate-pulse" style={{ animationDelay: "4s" }}></div>
+      
       {/* Grid pattern */}
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:20px_20px] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
@@ -94,13 +85,13 @@ export default function Contact() {
           viewport={{ once: true }}
         >
           {/* Section Label */}
-          <motion.p
+          <motion.p 
             className="text-sm font-semibold tracking-widest text-blue-400 uppercase mb-3"
             variants={itemVariants}
           >
             Get In Touch
           </motion.p>
-
+          
           {/* Heading */}
           <motion.h2
             variants={itemVariants}
@@ -114,8 +105,8 @@ export default function Contact() {
             variants={itemVariants}
             className="text-lg text-gray-300 mb-12 max-w-xl mx-auto"
           >
-            Have an idea, project, or just want to say hi? Feel free to reach
-            out — I&apos;d love to chat and explore how we can work together!
+            Have an idea, project, or just want to say hi? Feel free to reach out
+            — I&apos;d love to chat and explore how we can work together!
           </motion.p>
         </motion.div>
 
@@ -129,14 +120,9 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <div className="p-8 h-full flex flex-col">
-              <h3 className="text-2xl font-bold mb-6 text-white">
-                Contact Information
-              </h3>
-              <p className="text-gray-400 mb-8">
-                Feel free to reach out through any of these channels. I&apos;m
-                always open to discussing new projects, ideas, or opportunities.
-              </p>
-
+              <h3 className="text-2xl font-bold mb-6 text-white">Contact Information</h3>
+              <p className="text-gray-400 mb-8">Feel free to reach out through any of these channels. I&apos;m always open to discussing new projects, ideas, or opportunities.</p>
+              
               {/* Contact Details */}
               <div className="space-y-6 flex-grow">
                 <div className="flex items-center gap-4">
@@ -145,30 +131,20 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Email</p>
-                    <a
-                      href="mailto:youremail@example.com"
-                      className="text-white hover:text-blue-400 transition-colors"
-                    >
-                      youremail@example.com
-                    </a>
+                    <a href="mailto:youremail@example.com" className="text-white hover:text-blue-400 transition-colors">youremail@example.com</a>
                   </div>
                 </div>
-
+                
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-purple-600/20 rounded-full flex items-center justify-center text-purple-400">
                     <FaPhone size={20} />
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Phone</p>
-                    <a
-                      href="tel:+1234567890"
-                      className="text-white hover:text-purple-400 transition-colors"
-                    >
-                      +1 (234) 567-890
-                    </a>
+                    <a href="tel:+1234567890" className="text-white hover:text-purple-400 transition-colors">+1 (234) 567-890</a>
                   </div>
                 </div>
-
+                
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-pink-600/20 rounded-full flex items-center justify-center text-pink-400">
                     <FaMapMarkerAlt size={20} />
@@ -179,7 +155,7 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-
+              
               {/* Social Links */}
               <div className="mt-8 pt-8 border-t border-gray-800">
                 <p className="text-sm text-gray-400 mb-4">Connect with me</p>
@@ -215,7 +191,7 @@ export default function Contact() {
           </motion.div>
 
           {/* Contact Form - 3 columns */}
-          <motion.div
+          <motion.div 
             className="lg:col-span-3 bg-white/5 backdrop-blur-xl rounded-3xl shadow-xl border border-white/10 p-8"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -223,26 +199,17 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-
+            
             {formFeedback.message && (
-              <div
-                className={`mb-6 p-4 rounded-lg ${
-                  formFeedback.type === "success"
-                    ? "bg-green-600/20 text-green-400"
-                    : "bg-red-600/20 text-red-400"
-                }`}
-              >
+              <div className={`mb-6 p-4 rounded-lg ${formFeedback.type === "success" ? "bg-green-600/20 text-green-400" : "bg-red-600/20 text-red-400"}`}>
                 {formFeedback.message}
               </div>
             )}
-
+            
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium mb-2 text-gray-300"
-                  >
+                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">
                     Your Name
                   </label>
                   <div className="relative">
@@ -259,10 +226,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium mb-2 text-gray-300"
-                  >
+                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">
                     Your Email
                   </label>
                   <div className="relative">
@@ -281,10 +245,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2 text-gray-300"
-                >
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">
                   Your Message
                 </label>
                 <div className="relative">
@@ -315,25 +276,9 @@ export default function Contact() {
                   <span className="flex items-center gap-2 transition-transform group-hover:-translate-x-2">
                     {isSubmitting ? (
                       <>
-                        <svg
-                          className="animate-spin h-5 w-5 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
+                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                         Processing...
                       </>

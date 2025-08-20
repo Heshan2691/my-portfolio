@@ -7,7 +7,6 @@ import Achievements from "./components/Achievements";
 import Blogs from "./components/Blogs";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";
-import ProjectsGallery from "./components/ProjectsGallery";
 
 export default function Home() {
   return (
@@ -24,7 +23,6 @@ export default function Home() {
       <Blogs />
       <Resume />
       <Contact />
-      <ProjectsGallery />
     </main>
   );
 }
