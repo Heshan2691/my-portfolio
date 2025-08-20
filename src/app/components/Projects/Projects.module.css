@@ -1,0 +1,46 @@
+/* Blob animation keyframes */
+@keyframes blob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.animateBlob {
+  animation: blob 7s infinite;
+}
+
+.animationDelay2000 {
+  animation-delay: 2s;
+}
+
+.animationDelay4000 {
+  animation-delay: 4s;
+}
+
+/* Project card styles */
+.projectCard {
+  transition: all 0.3s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.3);
+}
+
+/* Tag animation */
+.tag {
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,203 @@
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -30px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(20px, 30px) scale(1.05);
+  }
+}
+
+.animate-blob {
+  animation: blob 15s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Card hover effect */
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+  }
+}
+
+.cardGlow {
+  transition: all 0.3s ease;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.cardGlow:hover {
+  animation: glow 2s infinite;
+}
+
+.cardGlow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0),
+    rgba(59, 130, 246, 0.8),
+    rgba(59, 130, 246, 0)
+  );
+  transform: scaleX(0);
+  transition: transform 0.5s;
+  z-index: 15;
+}
+
+.cardGlow:hover::before {
+  transform: scaleX(1);
+}
+
+/* Mouse interactive gallery effects */
+.projectImage {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s ease;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.projectImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease-out;
+}
+
+.projectImage:hover img {
+  transform: scale(1.05);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.projectImage:hover .imageOverlay {
+  opacity: 0.5;
+}
+
+/* Floating elements animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floatingElement {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Shine effect */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  transform: skewX(-25deg);
+  z-index: 20;
+}
+
+.shine:hover::before {
+  animation: shine 1.5s ease-out;
+}
+
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
+}
+
+.perspective3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+.tiltCard {
+  transform: rotateX(0) rotateY(0);
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+/* Tag hover animation */
+.tag {
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+}
+
+/* Button effects */
+.buttonPulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.buttonPulse::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.buttonPulse:hover::after {
+  opacity: 1;
+  transform: scale(1.5);
+}

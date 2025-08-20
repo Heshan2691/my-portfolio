@@ -1,0 +1,210 @@
+"use client";
+
+import { useEffect, useState, useRef } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
+import Image from "next/image";
+import { Montserrat, Playfair_Display } from "next/font/google";
+
+// Initialize fonts
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-playfair',
+});
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
+
+const AboutMe = () => {
+  const [gradientOpacity, setGradientOpacity] = useState(1);
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const controls = useAnimation();
+  
+  // Animate elements when they come into view
+  useEffect(() => {
+    if (isInView) {
+      controls.start("show");
+    }
+  }, [isInView, controls]);
+
+  // Handle scroll effect for gradient opacity
+  useEffect(() => {
+    const handleScroll = () => {
+      const aboutSection = document.getElementById("about");
+      if (!aboutSection) return;
+      const rect = aboutSection.getBoundingClientRect();
+
+      // Enhanced scroll effect with smoother transition
+      const scrollProgress = Math.abs(rect.top) / (rect.height / 2.5);
+      const opacity = Math.max(0, Math.min(1, 1 - scrollProgress));
+      setGradientOpacity(opacity);
+    };
+
+    // Call once on mount to set initial value
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <section
+      id="about"
+      ref={ref}
+      className={`${montserrat.variable} ${playfair.variable} relative min-h-screen flex flex-col justify-center items-center px-6 py-20 bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-black text-gray-900 dark:text-gray-100`}
+    >
+      {/* Background Accent */}
+      <div className="absolute inset-0 -z-10 opacity-20 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-3xl"></div>
+
+      {/* Container */}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate={controls}
+        viewport={{ once: true, amount: 0.2 }}
+        className="max-w-6xl w-full flex flex-col md:flex-row items-center gap-12"
+      >
+        {/* Profile Image */}
+        <motion.div 
+          variants={item} 
+          className="flex-shrink-0 relative group"
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 300, damping: 10 }}
+        >
+          <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
+          <Image
+            src="/profile.jpg" // 👉 replace with your image
+            alt="Profile"
+            width={360}
+            height={480}
+            className="rounded-2xl shadow-2xl object-cover relative z-10 group-hover:shadow-indigo-500/50 transition-all duration-500"
+          />
+        </motion.div>
+
+        {/* About Text */}
+        <motion.div 
+          variants={item} 
+          className="flex-1 text-center md:text-left"
+        >
+          <h2
+            className="text-6xl font-extrabold mb-8 tracking-tight"
+            style={{
+              fontFamily: "var(--font-playfair)",
+              backgroundImage: `linear-gradient(90deg, rgba(59,130,246,${gradientOpacity}) 0%, rgba(139,92,246,${gradientOpacity}) 100%)`,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: gradientOpacity < 0.1 ? "#333" : "transparent",
+              transition: "color 0.3s, background-image 0.3s",
+              filter: `brightness(${100 + (1 - gradientOpacity) * 50}%)`,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            About Me
+          </h2>
+
+          <motion.p
+            className="text-xl leading-relaxed font-light mb-8"
+            style={{
+              fontFamily: "var(--font-montserrat)",
+              color: "#4a5568",
+              transition: "all 0.4s ease-out",
+            }}
+            whileHover={{ scale: 1.01 }}
+          >
+            Hi 👋, I'm{" "}
+            <span className="font-semibold text-blue-500 hover:text-blue-600 transition-colors duration-300">Heshan</span>, a{" "}
+            <span className="font-semibold text-purple-500 hover:text-purple-600 transition-colors duration-300">
+              Software Engineering Undergraduate
+            </span>{" "}
+            passionate about building modern, responsive, and interactive web
+            applications. I love exploring new technologies and creating
+            impactful solutions that make life easier.
+          </motion.p>
+
+          <motion.p
+            className="text-xl leading-relaxed font-light mb-12"
+            style={{
+              fontFamily: "var(--font-montserrat)",
+              color: "#4a5568",
+              transition: "all 0.4s ease-out",
+            }}
+            whileHover={{ scale: 1.01 }}
+          >
+            Currently, I'm focusing on{" "}
+            <span className="font-semibold text-blue-500 hover:text-blue-600 transition-colors duration-300">
+              Full-Stack Development
+            </span>{" "}
+            with{" "}
+            <span className="text-purple-500 font-semibold hover:text-purple-600 transition-colors duration-300">
+              Next.js, React, Node.js, and ASP.NET
+            </span>
+            . I also enjoy working with{" "}
+            <span className="font-semibold hover:underline hover:text-indigo-400 transition-all duration-300">UI/UX</span> to make applications
+            not just functional but visually appealing.
+          </motion.p>
+
+          {/* Quick Stats */}
+          <motion.div
+            variants={container}
+            className="grid grid-cols-2 md:grid-cols-3 gap-6"
+          >
+            {[
+              { label: "Years Coding", value: "2+" },
+              { label: "Projects", value: "10+" },
+              { label: "Tech Stacks", value: "5+" },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={item}
+                whileHover={{ 
+                  scale: 1.05, 
+                  rotate: 1,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="p-6 rounded-2xl bg-white/30 dark:bg-gray-800/30 shadow-lg backdrop-blur-lg border border-white/20"
+              >
+                <h3 
+                  className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
+                  style={{ fontFamily: "var(--font-playfair)" }}
+                >
+                  {stat.value}
+                </h3>
+                <p 
+                  className="text-sm mt-2"
+                  style={{ fontFamily: "var(--font-montserrat)" }}
+                >
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};
+
+export default AboutMe;
