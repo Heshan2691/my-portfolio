@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { HiChevronRight } from "react-icons/hi";
@@ -13,7 +13,8 @@ interface Project {
   tech: string[];
   github: string;
   demo: string;
-  image?: string;
+  images?: string[]; // Array of image URLs
+  image?: string; // For backward compatibility
   color: string;
 }
 
@@ -26,63 +27,119 @@ interface ProjectCardProps {
 // You can download sample project images from Unsplash or other free sources
 const projects: Project[] = [
   {
-    title: "Travel Planner App",
+    title: "V-App",
     description:
-      "An AI-powered travel planning web application that helps tourists explore Sri Lanka by suggesting destinations, hotels, and events.",
-    tech: ["React", "Next.js", "MongoDB", "Tailwind CSS"],
-    github: "https://github.com/Heshan2691/travel-app",
+      "V-APP is a mobile and web platform for vehicle maintenance, enabling appointment booking, service history tracking, cloud document storage, and real-time notifications. Features include OTP/social login, PDF report generation, and role-based admin control.",
+    tech: [
+      "ASP.Net",
+      "Next.js",
+      "Flutter",
+      "Tailwind CSS",
+      "SQL Server",
+      "Azure Blob Storage",
+      "Firebase",
+      "Jira",
+      "GitHub",
+      "Figma",
+    ],
+    github: "https://github.com/NeonCoders-UoM",
     demo: "https://travel-app-demo.com",
-    image: "/projects/project1.png",
+    images: [
+      "/projects/vapp1.jpeg",
+      "/projects/vapp2.jpeg",
+      "/projects/vapp3.jpeg",
+      "/projects/vapp4.jpeg",
+    ],
     color: "from-sky-400 to-blue-600",
   },
   {
-    title: "Job Portal Platform",
+    title: "TripSuthra",
     description:
-      "A MERN stack job portal with featured jobs and employers, including authentication, admin panel, and search functionality.",
-    tech: ["MongoDB", "Express.js", "React", "Node.js"],
-    github: "https://github.com/Heshan2691/job-portal",
+      "TripSuthra developed a streamlined plan for Sri Lanka travel, simplifying visa applications and offering personalized recommendations. Key features include an admin dashboard for visa management, an AI chatbot for trip suggestions, and an interactive,data-rich trip map.",
+    tech: [
+      "React js",
+      "Express.js",
+      "Node js",
+      "SQL",
+      "TF-IDF",
+      "Random Forest",
+      "Tailwind CSS",
+      "Gemini API",
+    ],
+    github: "https://github.com/ashiduDissanayake/TripSuthra",
     demo: "https://job-portal-demo.com",
-    image: "/projects/project2.png",
+    images: ["/projects/project1.png", "/projects/project2.png"],
     color: "from-indigo-400 to-violet-600",
   },
   {
-    title: "Baby Driver Game",
+    title: "Matrimantra",
     description:
-      "An IoT-based learning game for children built using Arduino, ESP32, RFID, and React dashboard integration.",
-    tech: ["Arduino", "ESP32", "React", "Node.js"],
-    github: "https://github.com/Heshan2691/baby-driver",
+      "Matrimantra is a web-based matrimony platform designed to connect users for marriage, featuring advanced profile filtering (age, religion, location), opposite-gender matching, horoscope compatibility, and subscription tiers (Free, Basic, Premium, VIP). It supports user profile management, interest requests, and a responsive UI with a landing page, user list, admin dashboard, and horoscope matching system.",
+    tech: ["React Vite", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    github: "https://github.com/LushWare-Org/Matrimony",
     demo: "https://baby-driver-demo.com",
-    image: "/projects/project1.png",
+    images: ["/projects/matrimantra1.png", "/projects/matrimantra2.png"],
     color: "from-amber-400 to-orange-600",
   },
   {
-    title: "AI Image Generator",
+    title: "Jobszzy",
     description:
-      "A web application that leverages AI models to generate unique images from text descriptions with various style options.",
-    tech: ["Python", "React", "TensorFlow", "Flask"],
-    github: "https://github.com/Heshan2691/ai-image-gen",
+      "Jobszzy is a smart job portal that connects job seekers with the right opportunities and helps employers find top talent quickly and efficiently.",
+    tech: ["React Vite", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    github: "https://github.com/LushWare-Org/Jobszzy",
     demo: "https://ai-image-gen-demo.com",
-    image: "/projects/project1.png",
+    images: [
+      "/projects/jobszzy1.png",
+      "/projects/jobszzy2.png",
+      "/projects/jobszzy3.png",
+    ],
     color: "from-purple-400 to-pink-600",
   },
   {
-    title: "Crypto Dashboard",
+    title: "FoodLens",
     description:
-      "Real-time cryptocurrency tracking dashboard with personalized alerts, portfolio management, and market analysis tools.",
-    tech: ["React", "Node.js", "WebSockets", "D3.js"],
-    github: "https://github.com/Heshan2691/crypto-dashboard",
+      "FoodLens is a web app for tracking meals, activity, and mood, featuring a dashboard with real-time health metrics. It includes A-powered meal planning and diet recommendations.",
+    tech: [
+      "Next.js",
+      "Node.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "Spoonacular API",
+      "News API",
+    ],
+    github: "https://github.com/Heshan2691/Innovexa",
     demo: "https://crypto-dashboard-demo.com",
-    image: "/projects/project1.png",
+    images: [
+      "/projects/foodlens1.jpeg",
+      "/projects/foodlens2.png",
+      "/projects/foodlens3.png",
+    ],
     color: "from-green-400 to-teal-600",
   },
   {
-    title: "Smart Home Controller",
+    title: "Baby Driver",
     description:
-      "IoT application for controlling smart home devices with voice commands, automation rules, and energy usage monitoring.",
-    tech: ["React Native", "Firebase", "IoT", "MQTT"],
-    github: "https://github.com/Heshan2691/smart-home",
-    demo: "https://smart-home-demo.com",
-    image: "/projects/project1.png",
+      "Baby Driver is an educational game for young students, using a smartphone app to control a remote car for learning tasks, with a web app managing gameplay and real-time feedback.",
+    tech: ["RFID", "ESP32", "Arduino", "React", "Node.js", "MIT App Inventor"],
+    github: "https://github.com/Heshan2691/BabyDriver",
+    demo: "https://crypto-dashboard-demo.com",
+    images: [
+      "/projects/babydriver1.jpeg",
+      "/projects/babydriver2.jpeg",
+      "/projects/babydriver3.jpeg",
+      "/projects/babydriver4.jpeg",
+      "/projects/babydriver5.jpeg",
+    ],
+    color: "from-sky-400 to-blue-600",
+  },
+  {
+    title: "Innovate with Ballerina 2025 Official Website",
+    description:
+      "Collaborated on the development of the official website for Innovate with Ballerina 2025, a web development competition organized UOM and WSO2",
+    tech: ["React Vite", "Tailwind CSS", "Three js", "GSAP", "FramerMotion"],
+    github: "https://github.com/IEEESB-UOM/Innovate-with-Ballerina-New",
+    demo: "https://innovatewithballerina.com/",
+    images: ["/projects/ballerina1.png", "/projects/ballerina2.png"],
     color: "from-yellow-400 to-orange-600",
   },
 ];
@@ -112,23 +169,24 @@ const cardVariants: Variants = {
   },
 };
 
-const titleVariants: Variants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1],
-    },
-  },
-};
-
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-10%" });
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
+
+  // Carousel state
+  const [imgIndex, setImgIndex] = useState(0);
+  const images = project.images || (project.image ? [project.image] : []);
+
+  // Auto-advance carousel
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const timer = setInterval(() => {
+      setImgIndex((prev) => (prev + 1) % images.length);
+    }, 5000); // Change image every 5s
+    return () => clearInterval(timer);
+  }, [images.length]);
 
   // Mouse interactive effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -176,18 +234,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         transition: { duration: 0.3, ease: "easeOut" },
       }}
     >
-      {/* Project Image */}
+      {/* Project Image Carousel */}
       <div className={`${styles.projectImage} w-full relative`}>
-        {project.image ? (
+        {images.length > 0 ? (
           <>
             <Image
-              src={project.image}
+              src={images[imgIndex]}
               alt={project.title}
               width={600}
               height={400}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-all duration-500"
             />
             <div className={styles.imageOverlay}></div>
+            {/* Carousel indicators */}
+            {images.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                {images.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`w-2 h-2 rounded-full bg-white/40 ${
+                      imgIndex === i ? "bg-blue-400" : ""
+                    } transition-all`}
+                  ></span>
+                ))}
+              </div>
+            )}
 
             {/* Interactive overlay elements on hover */}
             <motion.div
@@ -200,33 +271,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/30 transition-colors"
-                  whileHover={{ scale: 1.1 }}
+                  className="w-14 h-14 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/70 transition-all border border-gray-500/30 shadow-lg"
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                  }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FaGithub size={20} />
+                  <FaGithub size={24} />
                 </motion.a>
                 <motion.a
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/30 transition-colors"
-                  whileHover={{ scale: 1.1 }}
+                  className="w-14 h-14 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/70 transition-all border border-gray-500/30 shadow-lg"
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                  }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FaExternalLinkAlt size={16} />
+                  <FaExternalLinkAlt size={18} />
                 </motion.a>
               </div>
             </motion.div>
-
-            {/* Technology badge */}
-            <div className="absolute top-4 right-4">
-              <span
-                className={`px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r ${project.color} text-white shadow-lg`}
-              >
-                {project.tech[0]}
-              </span>
-            </div>
           </>
         ) : (
           <div
@@ -253,49 +321,53 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       {/* Content container */}
       <div className="relative z-10 p-6 h-full flex flex-col">
         {/* Project Title */}
-        <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">
+        <h3 className="text-xl md:text-2xl font-bold mb-3 text-white">
           {project.title}
         </h3>
 
-        {/* Description */}
-        <p className="text-gray-300 mb-4 text-sm leading-relaxed flex-grow">
+        {/* Description - minimized space */}
+        <p className="text-gray-300 mb-2 text-md leading-snug line-clamp-3">
           {project.description}
         </p>
 
-        {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tech.map((tech, i) => (
-            <span
-              key={i}
-              className={`text-xs px-3 py-1 rounded-full bg-gradient-to-r ${project.color} text-white font-medium shadow-md transition-transform hover:scale-105 ${styles.tag}`}
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+        {/* Increased padding between description and GitHub button */}
+        <div className="h-8"></div>
 
-        {/* Links */}
-        <div className="flex gap-4 mt-auto relative z-10">
+        {/* GitHub Button - glassy style, placed after description */}
+        <div className="flex justify-start mb-4">
           <motion.a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 px-4 py-2 rounded-lg text-white transition-all ${styles.buttonPulse}`}
-            whileHover={{ scale: 1.05 }}
+            className={`inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/10 backdrop-blur-md text-white font-semibold shadow-lg border border-white/20 hover:bg-white/20 transition-all duration-300 ${styles.buttonPulse}`}
+            whileHover={{ scale: 1.08, rotate: -2 }}
             whileTap={{ scale: 0.98 }}
           >
-            <FaGithub /> Code
+            <FaGithub size={20} />
+            <span className="tracking-wide">View on GitHub</span>
           </motion.a>
-          <motion.a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex items-center gap-2 bg-gradient-to-r ${project.color} px-4 py-2 rounded-lg text-white transition-all font-medium ${styles.buttonPulse}`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <FaExternalLinkAlt /> Demo
-          </motion.a>
+        </div>
+
+        {/* Tech Stack Section - Enhanced */}
+        <div className="mb-2">
+          {/* <h4 className="text-sm font-semibold text-blue-300 mb-2 flex items-center bg-gray-800/40 rounded-full px-3 py-1 w-fit">
+            <span className="mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </span>
+            Tech Stack
+          </h4> */}
+          <div className="flex flex-wrap gap-2 px-1 py-2 bg-gray-800/20 backdrop-blur-sm rounded-lg border border-gray-700/30">
+            {project.tech.map((tech, i) => (
+              <span
+                key={i}
+                className={`text-xs px-3 py-1 rounded-full bg-gradient-to-r ${project.color} text-white font-medium shadow-md transition-all hover:scale-105 hover:-translate-y-1 duration-300 ${styles.tag}`}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
@@ -312,20 +384,37 @@ export default function Projects() {
     if (selectedCategory === "all") return true;
     if (
       selectedCategory === "web" &&
-      project.tech.some((t) => ["React", "Next.js", "Web"].includes(t))
+      project.tech.some((t) =>
+        [
+          "React",
+          "Next.js",
+          "Web",
+          "Node js",
+          "Express.js",
+          "React js",
+          "React Vite",
+        ].includes(t)
+      )
     )
       return true;
     if (
       selectedCategory === "mobile" &&
       project.tech.some((t) =>
-        ["React Native", "Mobile", "iOS", "Android"].includes(t)
+        ["React Native", "Mobile", "iOS", "Android", "Flutter"].includes(t)
       )
     )
       return true;
     if (
       selectedCategory === "ai" &&
       project.tech.some((t) =>
-        ["AI", "TensorFlow", "Machine Learning", "Python"].includes(t)
+        [
+          "AI",
+          "TensorFlow",
+          "Machine Learning",
+          "Python",
+          "TF-IDF",
+          "Random Forest",
+        ].includes(t)
       )
     )
       return true;
@@ -356,7 +445,7 @@ export default function Projects() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Heading */}
+        {/* Enhanced Heading Section */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0 }}
@@ -364,34 +453,36 @@ export default function Projects() {
             transition={{ duration: 1 }}
             className="inline-block mb-3"
           >
-            <div className="text-sm uppercase tracking-widest text-blue-400 font-mono mb-2">
-              What I&apos;ve Built
+            <div className="text-xs uppercase tracking-widest text-blue-400 font-mono mb-2 letter-spacing-wide">
+              <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-300">
+                What I&apos;ve Built
+              </span>
             </div>
             <motion.h2
-              variants={titleVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
+              className="text-4xl md:text-5xl font-extrabold text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              Interactive Gallery
+              My Projects
             </motion.h2>
+            {/* Animated Underline */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="h-1 w-32 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto my-4 rounded-full"
+            ></motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-gray-300 max-w-2xl mx-auto text-lg mt-6 px-4 py-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-md"
+            >
+              Explore my featured projects showcasing my skills in web
+              development, UI/UX design, and software engineering.
+            </motion.p>
           </motion.div>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto my-6"
-          ></motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-gray-400 max-w-2xl mx-auto text-lg mt-4"
-          >
-            Explore my featured projects showcasing my skills in web
-            development, UI/UX design, and software engineering
-          </motion.p>
-
           {/* Category filters */}
           <motion.div
             className="flex flex-wrap justify-center gap-2 md:gap-3 mt-8 px-4"
@@ -506,12 +597,13 @@ export default function Projects() {
               href="https://github.com/Heshan2691"
               target="_blank"
               rel="noopener noreferrer"
-              className={`relative flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white rounded-lg shadow-lg font-medium transition-colors group z-10 ${styles.buttonPulse}`}
-              whileHover={{ scale: 1.03 }}
+              className={`relative flex items-center gap-3 px-10 py-4 rounded-full bg-white/10 backdrop-blur-md text-white font-semibold shadow-xl border border-white/20 hover:bg-white/20 hover:shadow-2xl transition-all duration-300 group z-10 ${styles.buttonPulse}`}
+              whileHover={{ scale: 1.06, rotate: -1 }}
               whileTap={{ scale: 0.98 }}
             >
-              View More on GitHub{" "}
-              <HiChevronRight className="group-hover:translate-x-1 transition-transform" />
+              <FaGithub size={22} className="opacity-80" />
+              <span className="tracking-wide text-lg">View More on GitHub</span>
+              <HiChevronRight className="group-hover:translate-x-2 transition-transform text-xl" />
             </motion.a>
           </motion.div>
         </motion.div>

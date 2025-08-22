@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import Image from "next/image";
 import { Montserrat, Playfair_Display } from "next/font/google";
@@ -38,7 +38,7 @@ const item = {
 };
 
 const AboutMe = () => {
-  const [gradientOpacity, setGradientOpacity] = useState(1);
+  // Removed unused gradientOpacity state
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
   const controls = useAnimation();
@@ -50,30 +50,66 @@ const AboutMe = () => {
     }
   }, [isInView, controls]);
 
-  // Handle scroll effect for gradient opacity
+  // Removed unused gradientOpacity effect
+
+  // Terminal lines
+  const terminalLines = React.useMemo(
+    () => [
+      "I am an IT undergraduate at the University of Moratuwa, specializing in Software Engineering and Artificial Intelligence.",
+      "I enjoy combining creativity with technology to design meaningful user experiences and develop efficient, scalable systems.",
+      "My interests also extend to Data Science and Cloud Computing, and I am eager to enhance my expertise through hands-on projects while contributing to innovative and impactful solutions.",
+    ],
+    []
+  );
+
+  // Typing animation state
+  const [typedLines, setTypedLines] = useState<string[]>(["", "", ""]);
+  const [currentLine, setCurrentLine] = useState(0);
+  const [currentChar, setCurrentChar] = useState(0);
+  const [isDone, setIsDone] = useState(false);
+
+  // Only start typing the first time AboutMe comes into view
+  const [hasStarted, setHasStarted] = useState(false);
   useEffect(() => {
-    const handleScroll = () => {
-      const aboutSection = document.getElementById("about");
-      if (!aboutSection) return;
-      const rect = aboutSection.getBoundingClientRect();
+    if (isInView && !hasStarted) {
+      setTypedLines(["", "", ""]);
+      setCurrentLine(0);
+      setCurrentChar(0);
+      setIsDone(false);
+      setHasStarted(true);
+    }
+  }, [isInView, hasStarted]);
 
-      // Enhanced scroll effect with smoother transition
-      const scrollProgress = Math.abs(rect.top) / (rect.height / 2.5);
-      const opacity = Math.max(0, Math.min(1, 1 - scrollProgress));
-      setGradientOpacity(opacity);
-    };
-
-    // Call once on mount to set initial value
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  useEffect(() => {
+    if (!hasStarted || isDone) return;
+    if (currentLine < terminalLines.length) {
+      if (currentChar < terminalLines[currentLine].length) {
+        const timeout = setTimeout(() => {
+          setTypedLines((prev) => {
+            const updated = [...prev];
+            updated[currentLine] = terminalLines[currentLine].slice(
+              0,
+              currentChar + 1
+            );
+            return updated;
+          });
+          setCurrentChar((c) => c + 1);
+        }, 18);
+        return () => clearTimeout(timeout);
+      } else {
+        setCurrentLine((l) => l + 1);
+        setCurrentChar(0);
+      }
+    } else {
+      setIsDone(true);
+    }
+  }, [currentLine, currentChar, isDone, terminalLines, hasStarted]);
 
   return (
     <section
       id="about"
       ref={ref}
-      className={`${montserrat.variable} ${playfair.variable} relative min-h-screen flex flex-col justify-center items-center px-6 py-20 bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-black text-gray-900 dark:text-gray-100`}
+      className={`${montserrat.variable} ${playfair.variable} relative min-h-screen flex flex-col justify-center items-center px-6 py-20 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-gray-100`}
     >
       {/* Background Accent */}
       <div className="absolute inset-0 -z-10 opacity-20 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-3xl"></div>
@@ -99,73 +135,114 @@ const AboutMe = () => {
             alt="Profile"
             width={360}
             height={480}
+            style={{ width: "auto", height: "auto" }}
             className="rounded-2xl shadow-2xl object-cover relative z-10 group-hover:shadow-indigo-500/50 transition-all duration-500"
           />
         </motion.div>
 
         {/* About Text */}
         <motion.div variants={item} className="flex-1 text-center md:text-left">
-          <h2
-            className="text-6xl font-extrabold mb-8 tracking-tight"
-            style={{
-              fontFamily: "var(--font-playfair)",
-              backgroundImage: `linear-gradient(90deg, rgba(59,130,246,${gradientOpacity}) 0%, rgba(139,92,246,${gradientOpacity}) 100%)`,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: gradientOpacity < 0.1 ? "#333" : "transparent",
-              transition: "color 0.3s, background-image 0.3s",
-              filter: `brightness(${100 + (1 - gradientOpacity) * 50}%)`,
-              letterSpacing: "-0.02em",
-            }}
+          <motion.h2
+            className="text-3xl md:text-5xl font-extrabold text-left mb-10 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
             About Me
-          </h2>
+          </motion.h2>
 
-          <motion.p
-            className="text-xl leading-relaxed font-light mb-8"
-            style={{
-              fontFamily: "var(--font-montserrat)",
-              color: "#4a5568",
-              transition: "all 0.4s ease-out",
-            }}
+          <motion.div
+            className="mb-8"
+            style={{ transition: "all 0.4s ease-out" }}
             whileHover={{ scale: 1.01 }}
           >
-            Hi 👋, I&apos;m{" "}
-            <span className="font-semibold text-blue-500 hover:text-blue-600 transition-colors duration-300">
-              Heshan
-            </span>
-            , a{" "}
-            <span className="font-semibold text-purple-500 hover:text-purple-600 transition-colors duration-300">
-              Software Engineering Undergraduate
-            </span>{" "}
-            passionate about building modern, responsive, and interactive web
-            applications. I love exploring new technologies and creating
-            impactful solutions that make life easier.
-          </motion.p>
-
-          <motion.p
-            className="text-xl leading-relaxed font-light mb-12"
-            style={{
-              fontFamily: "var(--font-montserrat)",
-              color: "#4a5568",
-              transition: "all 0.4s ease-out",
-            }}
-            whileHover={{ scale: 1.01 }}
-          >
-            Currently, I&apos;m focusing on{" "}
-            <span className="font-semibold text-blue-500 hover:text-blue-600 transition-colors duration-300">
-              Full-Stack Development
-            </span>{" "}
-            with{" "}
-            <span className="text-purple-500 font-semibold hover:text-purple-600 transition-colors duration-300">
-              Next.js, React, Node.js, and ASP.NET
-            </span>
-            . I also enjoy working with{" "}
-            <span className="font-semibold hover:underline hover:text-indigo-400 transition-all duration-300">
-              UI/UX
-            </span>{" "}
-            to make applications not just functional but visually appealing.
-          </motion.p>
+            {/* Mac Terminal Styled Box */}
+            <div
+              style={{
+                background: "#23232b",
+                borderRadius: "1rem",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.28)",
+                padding: "2.5rem 1.5rem 2rem 1.5rem",
+                fontFamily:
+                  "'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
+                color: "#22c55e",
+                fontSize: "1.1rem",
+                lineHeight: "1.7",
+                textAlign: "left",
+                position: "relative",
+                border: "1px solid #2d2d37",
+                maxWidth: "100%",
+                overflowX: "auto",
+                margin: "0 auto",
+              }}
+            >
+              {/* Mac Terminal Top Bar */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "0.75rem",
+                  left: "1.25rem",
+                  display: "flex",
+                  gap: "0.5rem",
+                  height: "16px",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "50%",
+                    background: "#ff5f56",
+                    border: "1px solid #e0443e",
+                  }}
+                />
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "50%",
+                    background: "#ffbd2e",
+                    border: "1px solid #dea123",
+                  }}
+                />
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "50%",
+                    background: "#27c93f",
+                    border: "1px solid #1aaf29",
+                  }}
+                />
+              </div>
+              {/* Terminal Content */}
+              <div style={{ marginTop: "1.5rem" }}>
+                {typedLines.map((line, idx) => (
+                  <div key={idx} style={{ display: "flex" }}>
+                    <span
+                      style={{
+                        color: "#16a34a",
+                        fontWeight: "bold",
+                        marginRight: "0.5rem",
+                      }}
+                    >
+                      &gt;{" "}
+                    </span>
+                    <span>
+                      {line}
+                      {currentLine === idx && !isDone ? (
+                        <span style={{ color: "#16a34a" }}>|</span>
+                      ) : null}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
 
           {/* Quick Stats */}
           <motion.div

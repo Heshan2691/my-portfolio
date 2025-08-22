@@ -7,7 +7,7 @@ const Resume = () => {
   return (
     <section
       id="resume"
-      className="py-20 bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden"
+      className="py-20 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -15,10 +15,10 @@ const Resume = () => {
           <div className="text-left order-2 lg:order-1">
             {/* Heading */}
             <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
+              className="text-3xl md:text-4xl font-extrabold text-left mb-10 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
               Resume / CV
             </motion.h2>
@@ -73,12 +73,12 @@ const Resume = () => {
             </motion.div>
           </div>
 
-          {/* 3D Model (Right Side) */}
+          {/* 3D Model (Right Side, hidden on mobile) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            className="order-1 lg:order-2"
+            className="order-1 lg:order-2 hidden md:block"
             style={{ overflow: "visible" }}
           >
             <div className="w-full h-[600px] overflow-visible">

@@ -1,3 +1,8 @@
+@media (max-width: 767px) {
+  .splineWrapper {
+    display: none !important;
+  }
+}
 .heroContent {
   display: flex;
   align-items: center;
@@ -21,6 +26,7 @@
   justify-content: flex-end;
   align-items: flex-end;
   pointer-events: auto;
+  z-index: 100;
 }
 
 .splineWrapper spline-viewer {
@@ -71,12 +77,25 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  margin-bottom: 0.2rem;
 }
 
 .subtitle {
   max-width: 750px;
   font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
   opacity: 0.9;
+}
+
+.subtitle-role {
+  max-width: 750px;
+  font-size: clamp(1.2rem, 1rem + 0.5vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(90deg, #9ad0ff, #b69cff, #ffd89c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.95;
 }
 .subtitle span {
   color: #a7b8ff;
@@ -121,19 +140,32 @@
   border-color: rgba(255, 255, 255, 0.35);
 }
 
-.pills {
+.socialLinks {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
+  gap: 1.25rem;
+  margin-top: 1rem;
 }
-.pills li {
-  list-style: none;
-  font-size: 0.85rem;
+
+.socialLinks a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  opacity: 0.85;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.socialLinks a:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .scrollHint {

@@ -4,22 +4,11 @@ import { FaArrowRight } from "react-icons/fa";
 
 const blogs = [
   {
-    title: "Understanding Next.js 13 App Router",
+    title:
+      "Augmenting Reality with Embedded Systems: Crafting Smart Wearables for AR",
     description:
-      "A deep dive into the new Next.js App Router, server components, and how to structure modern apps.",
-    link: "https://your-blog-link.com",
-  },
-  {
-    title: "Building a MERN Stack Application",
-    description:
-      "Step-by-step guide to building a full-stack application using MongoDB, Express, React, and Node.js.",
-    link: "https://your-blog-link.com",
-  },
-  {
-    title: "Getting Started with Docker",
-    description:
-      "Learn how Docker helps in containerization and improves development workflows.",
-    link: "https://your-blog-link.com",
+      "Imagine slipping on a pair of sleek glasses that overlay digital instructions on a machine you’re fixing, or wearing a fitness band...",
+    link: "https://medium.com/@heshanmaduwantha2020/augmenting-reality-with-embedded-systems-crafting-smart-wearables-for-ar-ae70b50d1f19",
   },
 ];
 
@@ -27,21 +16,29 @@ export default function Blogs() {
   return (
     <section
       id="blogs"
-      className="py-20 bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white"
+      className="py-20 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white"
     >
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Title */}
         <motion.h2
-          className="text-5xl font-extrabold mb-16 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-pink-500 to-purple-500"
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          className="text-3xl md:text-4xl font-extrabold text-center mb-10 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          Blogs & Articles ✍️
+          Blogs & Articles
         </motion.h2>
 
         {/* Blogs Grid */}
-        <div className="grid md:grid-cols-3 gap-10">
+        <div
+          className={`grid gap-10 ${
+            blogs.length === 1
+              ? "grid-cols-1"
+              : blogs.length === 2
+              ? "md:grid-cols-2"
+              : "md:grid-cols-3"
+          }`}
+        >
           {blogs.map((blog, index) => (
             <motion.a
               key={index}

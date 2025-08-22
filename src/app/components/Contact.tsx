@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import {
   FaLinkedin,
   FaGithub,
@@ -36,40 +37,91 @@ export default function Contact() {
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // Initialize EmailJS
+  useEffect(() => {
+    // Get public key from environment variables
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    } else {
+      console.error("EmailJS public key not found in environment variables");
+    }
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      if (!formRef.current) {
+        throw new Error("Form reference is missing");
+      }
+
+      // Use environment variables for EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("Missing EmailJS configuration");
+      }
+
+      console.log("Sending email with:", {
+        serviceId,
+        templateId,
+        formData: {
+          from_name: formState.name,
+          from_email: formState.email,
+          sender_email: formState.email,
+          message: formState.message,
+          reply_to: formState.email,
+          to_name: "Heshan",
+          subject: `New Contact from ${formState.name} (${formState.email})`,
+        },
+      });
+
+      try {
+        const result = await emailjs.sendForm(
+          serviceId,
+          templateId,
+          formRef.current,
+          publicKey
+        );
+        console.log("Email sent successfully:", result);
+      } catch (error) {
+        console.error("EmailJS detailed error:", error);
+        throw error; // Rethrow for the outer catch block
+      }
+
       setFormFeedback({
         type: "success",
         message:
-          "Your message has been sent successfully! I&apos;ll get back to you soon.",
+          "Your message has been sent successfully! I'll get back to you soon.",
       });
+
+      // Reset the form
       setFormState({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      setFormFeedback({
+        type: "error",
+        message:
+          "Sorry, there was a problem sending your message. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
 
       // Reset feedback after 5 seconds
       setTimeout(() => {
         setFormFeedback({ type: "", message: "" });
       }, 5000);
-    }, 1500);
+    }
   };
 
   return (
     <section
       id="contact"
-      className="min-h-screen py-24 bg-gradient-to-b from-black to-gray-900 text-white relative overflow-hidden"
+      className="min-h-screen py-24 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white relative overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute w-96 h-96 bg-purple-600/10 rounded-full -top-20 -left-20 blur-3xl animate-pulse"></div>
@@ -101,13 +153,16 @@ export default function Contact() {
             Get In Touch
           </motion.p>
 
-          {/* Heading */}
+          {/* Heading and availability tag (fix: always show heading) */}
           <motion.h2
             variants={itemVariants}
-            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold mb-3 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
           >
             Let&apos;s Connect
           </motion.h2>
+          <span className="inline-block px-4 py-2 rounded-full bg-green-600/20 text-green-400 font-semibold text-sm shadow border border-green-400/30 animate-pulse mb-6">
+            🚀 Available for new projects
+          </span>
 
           {/* Description */}
           <motion.p
@@ -138,6 +193,7 @@ export default function Contact() {
               </p>
 
               {/* Contact Details */}
+
               <div className="space-y-6 flex-grow">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center text-blue-400">
@@ -149,7 +205,7 @@ export default function Contact() {
                       href="mailto:youremail@example.com"
                       className="text-white hover:text-blue-400 transition-colors"
                     >
-                      youremail@example.com
+                      heshanmaduwantha2020@gmail.com
                     </a>
                   </div>
                 </div>
@@ -161,10 +217,10 @@ export default function Contact() {
                   <div>
                     <p className="text-sm text-gray-400">Phone</p>
                     <a
-                      href="tel:+1234567890"
+                      href="tel:+94769255463"
                       className="text-white hover:text-purple-400 transition-colors"
                     >
-                      +1 (234) 567-890
+                      +94 76 925 5463
                     </a>
                   </div>
                 </div>
@@ -175,7 +231,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Location</p>
-                    <p className="text-white">New York, NY, United States</p>
+                    <p className="text-white">Sri Lanka</p>
                   </div>
                 </div>
               </div>
@@ -185,7 +241,7 @@ export default function Contact() {
                 <p className="text-sm text-gray-400 mb-4">Connect with me</p>
                 <div className="flex gap-4">
                   <a
-                    href="https://linkedin.com/in/yourprofile"
+                    href="https://www.linkedin.com/in/heshan-yatigammana-a67208283/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-white/5 hover:bg-blue-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-blue-400 transition-all"
@@ -194,7 +250,7 @@ export default function Contact() {
                     <FaLinkedin size={18} />
                   </a>
                   <a
-                    href="https://github.com/yourgithub"
+                    href="https://github.com/Heshan2691"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-white/5 hover:bg-gray-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all"
@@ -203,7 +259,7 @@ export default function Contact() {
                     <FaGithub size={18} />
                   </a>
                   <a
-                    href="mailto:youremail@example.com"
+                    href="mailto:heshanmaduwantha2020@gmail.com"
                     className="w-10 h-10 bg-white/5 hover:bg-red-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-red-400 transition-all"
                     aria-label="Email Me"
                   >
@@ -240,18 +296,20 @@ export default function Contact() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
-                    htmlFor="name"
+                    htmlFor="from_name"
                     className="block text-sm font-medium mb-2 text-gray-300"
                   >
                     Your Name
                   </label>
                   <div className="relative">
                     <input
-                      id="name"
-                      name="name"
+                      id="from_name"
+                      name="from_name"
                       type="text"
                       value={formState.name}
-                      onChange={handleChange}
+                      onChange={(e) =>
+                        setFormState({ ...formState, name: e.target.value })
+                      }
                       required
                       placeholder="John Doe"
                       className="w-full p-4 pl-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -260,18 +318,20 @@ export default function Contact() {
                 </div>
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="from_email"
                     className="block text-sm font-medium mb-2 text-gray-300"
                   >
                     Your Email
                   </label>
                   <div className="relative">
                     <input
-                      id="email"
-                      name="email"
+                      id="from_email"
+                      name="from_email"
                       type="email"
                       value={formState.email}
-                      onChange={handleChange}
+                      onChange={(e) =>
+                        setFormState({ ...formState, email: e.target.value })
+                      }
                       required
                       placeholder="john@example.com"
                       className="w-full p-4 pl-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -292,7 +352,9 @@ export default function Contact() {
                     id="message"
                     name="message"
                     value={formState.message}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                      setFormState({ ...formState, message: e.target.value })
+                    }
                     required
                     rows={6}
                     placeholder="Tell me about your project, idea, or just say hello..."
@@ -300,6 +362,20 @@ export default function Contact() {
                   ></textarea>
                 </div>
               </div>
+
+              {/* Hidden fields for EmailJS */}
+              <input type="hidden" name="to_name" value="Heshan" />
+              <input type="hidden" name="reply_to" value={formState.email} />
+              <input
+                type="hidden"
+                name="sender_email"
+                value={formState.email}
+              />
+              <input
+                type="hidden"
+                name="subject"
+                value={`New Contact from ${formState.name} (${formState.email})`}
+              />
 
               <div>
                 <motion.button
