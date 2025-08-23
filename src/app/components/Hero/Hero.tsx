@@ -86,7 +86,7 @@ export default function Hero() {
           <motion.div className={styles.cta} variants={item}>
             <a
               className={styles.primaryBtn}
-              href="/cv/Heshan Yatigammana.pdf"
+              href="/cv/Heshan_Yatigammana.pdf"
               download
             >
               Download Resume
