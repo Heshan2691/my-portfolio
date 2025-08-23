@@ -135,11 +135,21 @@ const projects: Project[] = [
   {
     title: "Innovate with Ballerina 2025 Official Website",
     description:
-      "Collaborated on the development of the official website for Innovate with Ballerina 2025, a web development competition organized UOM and WSO2",
+      "Collaborated on the development of the official website for Innovate with Ballerina 2025, a web development competition organized by UOM and WSO2",
     tech: ["React Vite", "Tailwind CSS", "Three js", "GSAP", "FramerMotion"],
     github: "https://github.com/IEEESB-UOM/Innovate-with-Ballerina-New",
     demo: "https://innovatewithballerina.com/",
     images: ["/projects/ballerina1.png", "/projects/ballerina2.png"],
+    color: "from-yellow-400 to-orange-600",
+  },
+  {
+    title: "MoraForesight 3.0 Official Website",
+    description:
+      "Collaborated on the development of the official website for MoraForesight 3.0, organized by IEEE student branch UOM",
+    tech: ["Next.js", "Tailwind CSS", "TypeScript", "GSAP", "FramerMotion"],
+    github: "https://github.com/IEEESB-UOM/Moraforesight3.0",
+    demo: "https://moraforesight.lk/",
+    images: ["/projects/foresight1.png", "/projects/foresight2.png"],
     color: "from-yellow-400 to-orange-600",
   },
 ];
