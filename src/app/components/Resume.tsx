@@ -63,7 +63,7 @@ const Resume = () => {
               transition={{ duration: 0.5, delay: 0.6 }}
             >
               <a
-                href="/cv/resume.pdf"
+                href="/cv/Heshan Yatigammana.pdf"
                 download
                 className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/20 transition duration-300 transform hover:-translate-y-1"
               >

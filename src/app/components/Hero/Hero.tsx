@@ -84,7 +84,11 @@ export default function Hero() {
           </motion.p>
 
           <motion.div className={styles.cta} variants={item}>
-            <a className={styles.primaryBtn} href="/cv/resume.pdf" download>
+            <a
+              className={styles.primaryBtn}
+              href="/cv/Heshan Yatigammana.pdf"
+              download
+            >
               Download Resume
             </a>
             <a className={styles.secondaryBtn} href="#contact">
