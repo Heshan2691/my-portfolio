@@ -139,7 +139,7 @@ export default function Contact() {
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
@@ -174,97 +174,106 @@ export default function Contact() {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+  <div className="flex flex-col lg:grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
           {/* Contact Info Card - 2 columns */}
           <motion.div
-            className="lg:col-span-2 bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl overflow-hidden border border-white/10 shadow-xl"
+            className="lg:col-span-2 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-xl mb-8 lg:mb-0"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
-            <div className="p-8 h-full flex flex-col">
-              <h3 className="text-2xl font-bold mb-6 text-white">
+            <div className="p-5 md:p-8 h-full flex flex-col">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-white">
                 Contact Information
               </h3>
-              <p className="text-gray-400 mb-8">
+              <p className="text-gray-400 mb-6 md:mb-8">
                 Feel free to reach out through any of these channels. I&apos;m
                 always open to discussing new projects, ideas, or opportunities.
               </p>
 
               {/* Contact Details */}
 
-              <div className="space-y-6 flex-grow">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center text-blue-400">
+              <div className="space-y-4 md:space-y-6 flex-grow">
+                <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4">
+                  <div className="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center text-blue-400 mb-2 sm:mb-0">
                     <FaEnvelope size={20} />
                   </div>
-                  <div>
+                  <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                     <p className="text-sm text-gray-400">Email</p>
                     <a
-                      href="mailto:youremail@example.com"
-                      className="text-white hover:text-blue-400 transition-colors"
+                      href="mailto:heshanmaduwantha2020@gmail.com"
+                      className="text-white hover:text-blue-400 transition-colors break-all"
                     >
                       heshanmaduwantha2020@gmail.com
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-purple-600/20 rounded-full flex items-center justify-center text-purple-400">
+                <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4">
+                  <div className="w-12 h-12 bg-purple-600/20 rounded-full flex items-center justify-center text-purple-400 mb-2 sm:mb-0">
                     <FaPhone size={20} />
                   </div>
-                  <div>
+                  <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                     <p className="text-sm text-gray-400">Phone</p>
                     <a
                       href="tel:+94769255463"
-                      className="text-white hover:text-purple-400 transition-colors"
+                      className="text-white hover:text-purple-400 transition-colors break-all"
                     >
                       +94 76 925 5463
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-pink-600/20 rounded-full flex items-center justify-center text-pink-400">
+                <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4">
+                  <div className="w-12 h-12 bg-pink-600/20 rounded-full flex items-center justify-center text-pink-400 mb-2 sm:mb-0">
                     <FaMapMarkerAlt size={20} />
                   </div>
-                  <div>
+                  <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                     <p className="text-sm text-gray-400">Location</p>
-                    <p className="text-white">Sri Lanka</p>
+                    <p className="text-white break-all">Sri Lanka</p>
                   </div>
                 </div>
               </div>
 
               {/* Social Links */}
-              <div className="mt-8 pt-8 border-t border-gray-800">
-                <p className="text-sm text-gray-400 mb-4">Connect with me</p>
-                <div className="flex gap-4">
-                  <a
-                    href="https://www.linkedin.com/in/heshan-yatigammana-a67208283/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/5 hover:bg-blue-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-blue-400 transition-all"
-                    aria-label="LinkedIn Profile"
-                  >
-                    <FaLinkedin size={18} />
-                  </a>
-                  <a
-                    href="https://github.com/Heshan2691"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/5 hover:bg-gray-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all"
-                    aria-label="GitHub Profile"
-                  >
-                    <FaGithub size={18} />
-                  </a>
-                  <a
-                    href="mailto:heshanmaduwantha2020@gmail.com"
-                    className="w-10 h-10 bg-white/5 hover:bg-red-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-red-400 transition-all"
-                    aria-label="Email Me"
-                  >
-                    <FaEnvelope size={18} />
-                  </a>
+              <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-gray-800">
+                <p className="text-sm text-gray-400 mb-4 text-center">Connect with me</p>
+                <div className="flex flex-row items-center justify-center gap-6 xs:flex-col xs:items-start xs:gap-4">
+                  <div className="flex flex-col items-center">
+                    <a
+                      href="https://www.linkedin.com/in/heshan-yatigammana-a67208283/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 bg-white/5 hover:bg-blue-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-blue-400 transition-all mb-1"
+                      aria-label="LinkedIn Profile"
+                    >
+                      <FaLinkedin size={18} />
+                    </a>
+                    <span className="text-xs text-gray-400">LinkedIn</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <a
+                      href="https://github.com/Heshan2691"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 bg-white/5 hover:bg-gray-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all mb-1"
+                      aria-label="GitHub Profile"
+                    >
+                      <FaGithub size={18} />
+                    </a>
+                    <span className="text-xs text-gray-400">GitHub</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <a
+                      href="mailto:heshanmaduwantha2020@gmail.com"
+                      className="w-10 h-10 bg-white/5 hover:bg-red-600/20 rounded-full flex items-center justify-center text-gray-400 hover:text-red-400 transition-all mb-1"
+                      aria-label="Email Me"
+                    >
+                      <FaEnvelope size={18} />
+                    </a>
+                    <span className="text-xs text-gray-400">Email</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -272,13 +281,13 @@ export default function Contact() {
 
           {/* Contact Form - 3 columns */}
           <motion.div
-            className="lg:col-span-3 bg-white/5 backdrop-blur-xl rounded-3xl shadow-xl border border-white/10 p-8"
+            className="lg:col-span-3 bg-white/5 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-xl border border-white/10 p-5 md:p-8"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Send a Message</h3>
 
             {formFeedback.message && (
               <div
@@ -293,7 +302,7 @@ export default function Contact() {
             )}
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6">
                 <div>
                   <label
                     htmlFor="from_name"
@@ -312,7 +321,7 @@ export default function Contact() {
                       }
                       required
                       placeholder="John Doe"
-                      className="w-full p-4 pl-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full p-4 pl-5 rounded-lg md:rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-base md:text-lg"
                     />
                   </div>
                 </div>
@@ -334,7 +343,7 @@ export default function Contact() {
                       }
                       required
                       placeholder="john@example.com"
-                      className="w-full p-4 pl-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full p-4 pl-5 rounded-lg md:rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-base md:text-lg"
                     />
                   </div>
                 </div>
@@ -358,7 +367,7 @@ export default function Contact() {
                     required
                     rows={6}
                     placeholder="Tell me about your project, idea, or just say hello..."
-                    className="w-full p-4 pl-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all"
+                    className="w-full p-4 pl-5 rounded-lg md:rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all text-base md:text-lg"
                   ></textarea>
                 </div>
               </div>
@@ -381,7 +390,7 @@ export default function Contact() {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-4 font-semibold text-white transition-all disabled:opacity-70 w-full md:w-auto"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg md:rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-4 font-semibold text-white transition-all disabled:opacity-70 w-full md:w-auto text-base md:text-lg"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >

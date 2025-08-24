@@ -72,13 +72,21 @@
 }
 
 /* Mouse interactive gallery effects */
+
 .projectImage {
   height: 220px;
-  overflow: hidden;
   position: relative;
   transition: all 0.4s ease;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
+}
+
+@media (max-width: 640px) {
+  .projectImage {
+    height: 160px;
+    min-height: 120px;
+    padding: 0.5rem;
+  }
 }
 
 .projectImage img {
@@ -109,6 +117,14 @@
   opacity: 0.5;
 }
 
+@media (max-width: 640px) {
+  .projectImage {
+    height: 160px;
+    min-height: 120px;
+    padding: 0.5rem;
+  }
+}
+
 /* Floating elements animation */
 @keyframes float {
   0%,
@@ -127,7 +143,7 @@
 /* Shine effect */
 .shine {
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .shine::before {
