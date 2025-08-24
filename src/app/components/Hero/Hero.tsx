@@ -84,16 +84,21 @@ export default function Hero() {
           </motion.p>
 
           <motion.div className={styles.cta} variants={item}>
-            <a
-              className={styles.primaryBtn}
-              href="/cv/Heshan_Yatigammana.pdf"
-              download
-            >
-              Download Resume
-            </a>
-            <a className={styles.secondaryBtn} href="#contact">
-              Let’s Connect
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <a
+                className={`${styles.primaryBtn} w-full sm:w-auto text-base py-3 px-6 rounded-xl`}
+                href="/cv/Heshan_Yatigammana.pdf"
+                download
+              >
+                Download Resume
+              </a>
+              <a
+                className={`${styles.secondaryBtn} w-full sm:w-auto text-base py-3 px-6 rounded-xl`}
+                href="#contact"
+              >
+                Let’s Connect
+              </a>
+            </div>
           </motion.div>
 
           <motion.div
