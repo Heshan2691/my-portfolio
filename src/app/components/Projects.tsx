@@ -398,11 +398,15 @@ export default function Projects() {
         [
           "React",
           "Next.js",
-          "Web",
-          "Node js",
-          "Express.js",
           "React js",
           "React Vite",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "Tailwind CSS",
+          "TypeScript",
+          "GSAP",
+          "FramerMotion",
         ].includes(t)
       )
     )
@@ -415,22 +419,15 @@ export default function Projects() {
     )
       return true;
     if (
-      selectedCategory === "ai" &&
-      project.tech.some((t) =>
-        [
-          "AI",
-          "TensorFlow",
-          "Machine Learning",
-          "Python",
-          "TF-IDF",
-          "Random Forest",
-        ].includes(t)
-      )
+      selectedCategory === "iot" &&
+      project.tech.some((t) => ["RFID", "ESP32", "Arduino"].includes(t))
     )
       return true;
     if (
-      selectedCategory === "iot" &&
-      project.tech.some((t) => ["IoT", "Arduino", "ESP32", "MQTT"].includes(t))
+      selectedCategory === "ai" &&
+      project.tech.some((t) =>
+        ["AI", "ML", "TF-IDF", "Random Forest", "Gemini API"].includes(t)
+      )
     )
       return true;
     return false;
@@ -441,182 +438,237 @@ export default function Projects() {
       id="projects"
       className="py-24 px-6 bg-gradient-to-b from-gray-950 via-gray-900 to-black relative overflow-hidden"
     >
-      {/* Background effects */}
-      <div className="absolute inset-0 opacity-30">
-        <div
-          className={`absolute top-0 -left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-[100px] ${styles["animate-blob"]}`}
-        ></div>
-        <div
-          className={`absolute bottom-0 right-10 w-72 h-72 bg-purple-500 rounded-full filter blur-[100px] ${styles["animate-blob"]} ${styles["animation-delay-2000"]}`}
-        ></div>
-        <div
-          className={`absolute bottom-10 left-1/2 w-72 h-72 bg-indigo-500 rounded-full filter blur-[100px] ${styles["animate-blob"]} ${styles["animation-delay-4000"]}`}
-        ></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Enhanced Heading Section */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="inline-block mb-3"
-          >
-            <div className="text-xs uppercase tracking-widest text-blue-400 font-mono mb-2 letter-spacing-wide">
-              <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-300">
-                What I&apos;ve Built
-              </span>
-            </div>
-            <motion.h2
-              className="text-4xl md:text-5xl font-extrabold text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg"
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              My Projects
-            </motion.h2>
-            {/* Animated Underline */}
+      {/* Desktop/Tablet UI */}
+      <div className="hidden sm:block">
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Enhanced Heading Section */}
+          <div className="text-center mb-16">
             <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="h-1 w-32 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto my-4 rounded-full"
-            ></motion.div>
-            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="inline-block mb-3"
+            >
+              <div className="text-xs uppercase tracking-widest text-blue-400 font-mono mb-2 letter-spacing-wide">
+                <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-300">
+                  What I&apos;ve Built
+                </span>
+              </div>
+              <motion.h2
+                className="text-4xl md:text-5xl font-extrabold text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg"
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                My Projects
+              </motion.h2>
+              {/* Animated Underline */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="h-1 w-32 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto my-4 rounded-full"
+              ></motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="text-gray-300 max-w-2xl mx-auto text-lg mt-6 px-4 py-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-md"
+              >
+                Explore my featured projects showcasing my skills in web
+                development, UI/UX design, and software engineering.
+              </motion.p>
+            </motion.div>
+            {/* Category filters */}
+            <motion.div
+              className="flex flex-wrap justify-center gap-2 md:gap-3 mt-8 px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-gray-300 max-w-2xl mx-auto text-lg mt-6 px-4 py-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-md"
+              transition={{ duration: 0.7, delay: 0.4 }}
             >
-              Explore my featured projects showcasing my skills in web
-              development, UI/UX design, and software engineering.
-            </motion.p>
-          </motion.div>
-          {/* Category filters */}
+              <button
+                className={`px-4 py-2 rounded-full text-sm transition-all ${
+                  selectedCategory === "all"
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
+                    : "bg-white/10 text-gray-300 hover:bg-white/20"
+                }`}
+                onClick={() => setSelectedCategory("all")}
+              >
+                All Projects
+              </button>
+              <button
+                className={`px-4 py-2 rounded-full text-sm transition-all ${
+                  selectedCategory === "web"
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
+                    : "bg-white/10 text-gray-300 hover:bg-white/20"
+                }`}
+                onClick={() => setSelectedCategory("web")}
+              >
+                Web Development
+              </button>
+              <button
+                className={`px-4 py-2 rounded-full text-sm transition-all ${
+                  selectedCategory === "mobile"
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
+                    : "bg-white/10 text-gray-300 hover:bg-white/20"
+                }`}
+                onClick={() => setSelectedCategory("mobile")}
+              >
+                Mobile Apps
+              </button>
+              <button
+                className={`px-4 py-2 rounded-full text-sm transition-all ${
+                  selectedCategory === "iot"
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
+                    : "bg-white/10 text-gray-300 hover:bg-white/20"
+                }`}
+                onClick={() => setSelectedCategory("iot")}
+              >
+                IoT Projects
+              </button>
+              <button
+                className={`px-4 py-2 rounded-full text-sm transition-all ${
+                  selectedCategory === "ai"
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
+                    : "bg-white/10 text-gray-300 hover:bg-white/20"
+                }`}
+                onClick={() => setSelectedCategory("ai")}
+              >
+                AI & ML
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Projects Grid */}
           <motion.div
-            className="flex flex-wrap justify-center gap-2 md:gap-3 mt-8 px-4"
+            ref={containerRef}
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          >
+            {filteredProjects.map((project, index) => (
+              <ProjectCard key={index} project={project} index={index} />
+            ))}
+          </motion.div>
+
+          {filteredProjects.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-16"
+            >
+              <p className="text-xl text-gray-400">
+                No projects found in this category.
+              </p>
+            </motion.div>
+          )}
+
+          {/* View more projects button */}
+          <motion.div
+            className="flex justify-center mt-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
           >
-            <button
-              className={`px-4 py-2 rounded-full text-sm transition-all ${
-                selectedCategory === "all"
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
-                  : "bg-white/10 text-gray-300 hover:bg-white/20"
-              }`}
-              onClick={() => setSelectedCategory("all")}
-            >
-              All Projects
-            </button>
-            <button
-              className={`px-4 py-2 rounded-full text-sm transition-all ${
-                selectedCategory === "web"
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
-                  : "bg-white/10 text-gray-300 hover:bg-white/20"
-              }`}
-              onClick={() => setSelectedCategory("web")}
-            >
-              Web Development
-            </button>
-            <button
-              className={`px-4 py-2 rounded-full text-sm transition-all ${
-                selectedCategory === "mobile"
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
-                  : "bg-white/10 text-gray-300 hover:bg-white/20"
-              }`}
-              onClick={() => setSelectedCategory("mobile")}
-            >
-              Mobile Apps
-            </button>
-            <button
-              className={`px-4 py-2 rounded-full text-sm transition-all ${
-                selectedCategory === "iot"
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
-                  : "bg-white/10 text-gray-300 hover:bg-white/20"
-              }`}
-              onClick={() => setSelectedCategory("iot")}
-            >
-              IoT Projects
-            </button>
-            <button
-              className={`px-4 py-2 rounded-full text-sm transition-all ${
-                selectedCategory === "ai"
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md"
-                  : "bg-white/10 text-gray-300 hover:bg-white/20"
-              }`}
-              onClick={() => setSelectedCategory("ai")}
-            >
-              AI & ML
-            </button>
+            <motion.div className="relative">
+              {/* Animated dots around the button */}
+              <div className="absolute -inset-4 opacity-70 blur-md">
+                <div
+                  className={`absolute top-0 -left-10 w-16 h-16 bg-blue-400 rounded-full ${styles.floatingElement}`}
+                  style={{ animationDelay: "0s" }}
+                ></div>
+                <div
+                  className={`absolute bottom-0 -right-10 w-12 h-12 bg-purple-400 rounded-full ${styles.floatingElement}`}
+                  style={{ animationDelay: "0.5s" }}
+                ></div>
+                <div
+                  className={`absolute -bottom-6 left-10 w-8 h-8 bg-cyan-400 rounded-full ${styles.floatingElement}`}
+                  style={{ animationDelay: "0.8s" }}
+                ></div>
+              </div>
+
+              {/* Button */}
+              <motion.a
+                href="https://github.com/Heshan2691"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`relative flex items-center gap-3 px-10 py-4 rounded-full bg-white/10 backdrop-blur-md text-white font-semibold shadow-xl border border-white/20 hover:bg-white/20 hover:shadow-2xl transition-all duration-300 group z-10 ${styles.buttonPulse}`}
+                whileHover={{ scale: 1.06, rotate: -1 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <FaGithub size={22} className="opacity-80" />
+                <span className="tracking-wide text-lg">
+                  View More on GitHub
+                </span>
+                <HiChevronRight className="group-hover:translate-x-2 transition-transform text-xl" />
+              </motion.a>
+            </motion.div>
           </motion.div>
         </div>
+      </div>
 
-        {/* Projects Grid */}
-        <motion.div
-          ref={containerRef}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-        >
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
-          ))}
-        </motion.div>
-
-        {filteredProjects.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-16"
-          >
-            <p className="text-xl text-gray-400">
-              No projects found in this category.
-            </p>
-          </motion.div>
-        )}
-
-        {/* View more projects button */}
-        <motion.div
-          className="flex justify-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-        >
-          <motion.div className="relative">
-            {/* Animated dots around the button */}
-            <div className="absolute -inset-4 opacity-70 blur-md">
-              <div
-                className={`absolute top-0 -left-10 w-16 h-16 bg-blue-400 rounded-full ${styles.floatingElement}`}
-                style={{ animationDelay: "0s" }}
-              ></div>
-              <div
-                className={`absolute bottom-0 -right-10 w-12 h-12 bg-purple-400 rounded-full ${styles.floatingElement}`}
-                style={{ animationDelay: "0.5s" }}
-              ></div>
-              <div
-                className={`absolute -bottom-6 left-10 w-8 h-8 bg-cyan-400 rounded-full ${styles.floatingElement}`}
-                style={{ animationDelay: "0.8s" }}
-              ></div>
-            </div>
-
-            {/* Button */}
-            <motion.a
-              href="https://github.com/Heshan2691"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`relative flex items-center gap-3 px-10 py-4 rounded-full bg-white/10 backdrop-blur-md text-white font-semibold shadow-xl border border-white/20 hover:bg-white/20 hover:shadow-2xl transition-all duration-300 group z-10 ${styles.buttonPulse}`}
-              whileHover={{ scale: 1.06, rotate: -1 }}
-              whileTap={{ scale: 0.98 }}
+      {/* Mobile UI - Enhanced Card Layout */}
+      <div className="block sm:hidden">
+        <h2 className="text-3xl font-extrabold text-center mb-8 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">
+          My Projects
+        </h2>
+        <div className="flex flex-col gap-8">
+          {filteredProjects.map((project, idx) => (
+            <div
+              key={idx}
+              className="rounded-2xl shadow-xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-900 via-gray-800 to-black relative"
             >
-              <FaGithub size={22} className="opacity-80" />
-              <span className="tracking-wide text-lg">View More on GitHub</span>
-              <HiChevronRight className="group-hover:translate-x-2 transition-transform text-xl" />
-            </motion.a>
-          </motion.div>
-        </motion.div>
+              {/* Project Image */}
+              {project.images && project.images[0] && (
+                <div className="relative w-full h-44 overflow-hidden">
+                  <Image
+                    src={project.images[0]}
+                    alt={project.title}
+                    width={400}
+                    height={176}
+                    className="w-full h-full object-cover rounded-b-2xl border-b-4 border-blue-400"
+                    priority={idx === 0}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+              )}
+              <div className="p-5 flex flex-col gap-2">
+                <h3 className="text-lg font-bold text-white mb-1 tracking-tight">
+                  {project.title}
+                </h3>
+                <p className="text-gray-300 text-sm mb-2 line-clamp-4">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {project.tech.slice(0, 4).map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 rounded-full text-xs bg-blue-500/20 text-blue-300 font-medium shadow"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {project.tech.length > 4 && (
+                    <span className="px-2 py-1 rounded-full text-xs bg-gray-700/40 text-gray-300 font-medium">
+                      +{project.tech.length - 4}
+                    </span>
+                  )}
+                </div>
+                <div className="flex gap-4 mt-2">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 px-4 py-2 rounded-full bg-blue-500/20 text-blue-300 font-semibold text-xs shadow hover:bg-blue-500/40 transition"
+                  >
+                    <FaGithub size={16} /> GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
