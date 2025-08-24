@@ -149,7 +149,11 @@ const projects: Project[] = [
     tech: ["Next.js", "Tailwind CSS", "TypeScript", "GSAP", "FramerMotion"],
     github: "https://github.com/IEEESB-UOM/Moraforesight3.0",
     demo: "https://moraforesight.lk/",
-    images: ["/projects/foresight1.png", "/projects/foresight2.png"],
+    images: [
+      "/projects/foresight1.png",
+      "/projects/foresight2.png",
+      "/projects/foresight3.png",
+    ],
     color: "from-yellow-400 to-orange-600",
   },
 ];

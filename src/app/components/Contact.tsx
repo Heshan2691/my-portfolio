@@ -174,7 +174,7 @@ export default function Contact() {
           </motion.p>
         </motion.div>
 
-  <div className="flex flex-col lg:grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+        <div className="flex flex-col lg:grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
           {/* Contact Info Card - 2 columns */}
           <motion.div
             className="lg:col-span-2 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-xl mb-8 lg:mb-0"
@@ -238,7 +238,9 @@ export default function Contact() {
 
               {/* Social Links */}
               <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-gray-800">
-                <p className="text-sm text-gray-400 mb-4 text-center">Connect with me</p>
+                <p className="text-sm text-gray-400 mb-4 text-center">
+                  Connect with me
+                </p>
                 <div className="flex flex-row items-center justify-center gap-6 xs:flex-col xs:items-start xs:gap-4">
                   <div className="flex flex-col items-center">
                     <a
@@ -287,7 +289,9 @@ export default function Contact() {
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Send a Message</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
+              Send a Message
+            </h3>
 
             {formFeedback.message && (
               <div
